@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.1.0"></a>
+# [0.1.0](https://github.com/waitingsong/node-idcard-reader-base/compare/v0.0.1...v0.1.0) (2019-02-16)
+
+
+### Features
+
+* format DataBase and composite image ([96b983a](https://github.com/waitingsong/node-idcard-reader-base/commit/96b983a))
+
+
+
 <a name="0.0.1"></a>
 ## 0.0.1 (2019-02-16)
 
