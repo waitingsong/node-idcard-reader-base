@@ -38,9 +38,9 @@ export const initialCompositeOpts: CompositeOpts = {
   compositeQuality: 35,
   compositeType: 'jpg',
   textColor: '#303030',
-  fontHwxhei: '',
-  fontOcrb: '',
-  fontSimhei: '',
+  fontHwxhei: 'c:/Windows/Fonts/hwxhei.ttf',
+  fontOcrb: 'c:/Windows/Fonts/ocrb10bt.ttf',
+  fontSimhei: 'c:/Windows/Fonts/simhei.ttf',
 }
 
 /** 默认初始化参数 */
