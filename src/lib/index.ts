@@ -1,15 +1,17 @@
-import { createDirAsync, createFileAsync, isDirExists, isFileExists, join } from '@waiting/shared-core'
+import { createDirAsync, createFileAsync, isDirExists, isFileExists, join, normalize } from '@waiting/shared-core'
 import { Observable } from 'rxjs'
 import {
   concatMap,
 } from 'rxjs/operators'
 
 import { handleAvatar, handleBaseInfo } from './composite'
-import { nationMap } from './config'
+import { initialCompositeOpts, initialDeviceOpts, initialOpts, nationMap } from './config'
 import {
   CompositeOpts,
   DataBase,
+  DeviceOpts,
   IDData,
+  Options,
 } from './model'
 
 
@@ -67,4 +69,88 @@ export async function testWrite(dir: string | void): Promise<void> {
     await createDirAsync(dir)
     await createFileAsync(join(dir, '.test'), 'idctest') // 创建测试文件
   }
+}
+
+
+export function parseDeviceOpts(options: Options): DeviceOpts {
+  const deviceOpts: DeviceOpts = { ...initialDeviceOpts }
+
+  if (! options.dllTxt) {
+    throw new Error('params dllTxt undefined or blank')
+  }
+  else {
+    deviceOpts.dllTxt = normalize(options.dllTxt)
+  }
+
+  if (typeof options.dllImage === 'string' && options.dllImage) {
+    deviceOpts.dllImage = normalize(options.dllImage)
+  }
+
+  if (typeof options.imgSaveDir === 'string' && options.imgSaveDir) {
+    deviceOpts.imgSaveDir = normalize(options.imgSaveDir)
+  }
+
+  if (typeof options.debug === 'boolean') {
+    deviceOpts.debug = options.debug
+  }
+
+  if (typeof options.searchAll === 'boolean') {
+    deviceOpts.searchAll = options.searchAll
+  }
+
+  if (typeof options.findCardRetryTimes === 'number') {
+    deviceOpts.findCardRetryTimes = options.findCardRetryTimes
+  }
+
+  if (isNaN(deviceOpts.findCardRetryTimes) || deviceOpts.findCardRetryTimes < 0) {
+    deviceOpts.findCardRetryTimes = initialOpts.findCardRetryTimes
+  }
+
+  return deviceOpts
+}
+
+export function parseCompositeOpts(options: Options): CompositeOpts {
+  const compositeOpts: CompositeOpts = { ...initialCompositeOpts }
+
+  if (options.dllImage && options.useComposite) {
+    compositeOpts.useComposite = true
+  }
+
+  if (options.compositeDir && typeof options.compositeDir === 'string') {
+    compositeOpts.compositeDir = normalize(options.compositeDir)
+  }
+
+  if (typeof options.compositeQuality === 'number' &&
+    options.compositeQuality >= 1 && options.compositeQuality <= 100
+  ) {
+    compositeOpts.compositeQuality = options.compositeQuality
+  }
+
+  if (options.textColor) {
+    compositeOpts.textColor = options.textColor
+  }
+
+  if (options.compositeType) {
+    if (! ['bmp', 'gif', 'jpg', 'png', 'webp'].includes(options.compositeType)) {
+      throw new TypeError('compositeType value invalid')
+    }
+    compositeOpts.compositeType = options.compositeType
+  }
+  else {
+    compositeOpts.compositeType = initialOpts.compositeType
+  }
+
+  if (options.fontHwxhei) {
+    compositeOpts.fontHwxhei = options.fontHwxhei
+  }
+
+  if (options.fontOcrb) {
+    compositeOpts.fontOcrb = options.fontOcrb
+  }
+
+  if (options.fontSimhei) {
+    compositeOpts.fontSimhei = options.fontSimhei
+  }
+
+  return compositeOpts
 }
