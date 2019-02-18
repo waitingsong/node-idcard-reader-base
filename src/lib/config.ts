@@ -6,6 +6,7 @@ import {
 import {
   CompositeOpts,
   Config,
+  DeviceOpts,
   IDData,
   Options,
 } from './model'
@@ -31,7 +32,6 @@ export const initialDataBase = {
   enddate: '',
 }
 
-
 export const initialCompositeOpts: CompositeOpts = {
   useComposite: false,
   compositeDir: config.tmpDir,
@@ -44,15 +44,21 @@ export const initialCompositeOpts: CompositeOpts = {
 }
 
 /** 默认初始化参数 */
-export const initialOpts: Required<Options> = {
+export const initialDeviceOpts: DeviceOpts = {
   dllTxt: '',
   dllImage: '',
   findCardRetryTimes: 1,
   imgSaveDir: config.tmpDir,
   debug: false,
   searchAll: false,
+}
+
+/** 默认初始化参数 */
+export const initialOpts: Required<Options> = {
+  ...initialDeviceOpts,
   ...initialCompositeOpts,
 }
+
 
 export const initialIDData: IDData = {
   compositePath: '',
