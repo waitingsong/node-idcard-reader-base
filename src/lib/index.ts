@@ -1,3 +1,4 @@
+import { createDirAsync, createFileAsync, isDirExists, isFileExists, join } from '@waiting/shared-core'
 import { Observable } from 'rxjs'
 import {
   concatMap,
@@ -48,4 +49,22 @@ export function composite(data: IDData, options: CompositeOpts): Observable<stri
   )
 
   return ret$
+}
+
+
+export async function validateDllFile(path: string): Promise<void> {
+  if (! await isFileExists(path)) {
+    throw new Error('File not exists: ' + path)
+  }
+}
+
+
+export async function testWrite(dir: string | void): Promise<void> {
+  if (!dir) {
+    throw new Error('value of imgSaveDir empty')
+  }
+  if (! await isDirExists(dir)) {
+    await createDirAsync(dir)
+    await createFileAsync(join(dir, '.test'), 'idctest') // 创建测试文件
+  }
 }
