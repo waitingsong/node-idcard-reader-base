@@ -21,7 +21,7 @@ export const config: Config = {
 export const initialDataBase = {
   name: '',
   gender: 0,
-  genderName: '未知',
+  genderName: '',
   nation: '',
   nationName: '',
   birth: '',

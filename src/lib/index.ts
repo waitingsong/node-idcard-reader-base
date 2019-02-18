@@ -18,22 +18,48 @@ import {
 export function formatBaseData(data: DataBase): DataBase {
   const ret: DataBase = { ...data }
 
-  switch (ret.gender) {
-    case 1:
-      ret.genderName = '男'
-      break
-    case 2:
-      ret.genderName = '女'
-      break
-    default:
-      ret.genderName = '未知'
-      break
+  if (ret.gender) {
+    switch (ret.gender) {
+      case 1:
+        ret.genderName = '男'
+        break
+      case 2:
+        ret.genderName = '女'
+        break
+      default:
+        ret.genderName = '未知'
+        break
+    }
   }
-  const str = nationMap.get(ret.nation)
+  else if (ret.genderName && ! ret.gender) {
+    switch (ret.genderName) {
+      case '男':
+        ret.gender = 1
+        break
+      case '女':
+        ret.gender = 2
+        break
+      default:
+        ret.gender = 0
+        break
+    }
+  }
 
-  ret.nationName = str ? str.trim() : '未知'
-  ret.startdate = ret.startdate.trim()
-  ret.enddate = ret.enddate.trim()
+  if (ret.nation) {
+    const str = nationMap.get(ret.nation)
+
+    ret.nationName = str ? str.trim() : '未知'
+    ret.startdate = ret.startdate.trim()
+    ret.enddate = ret.enddate.trim()
+  }
+  else if (ret.nationName && ! ret.nation) {
+    for (const [key, val] of nationMap) {
+      if (val === ret.nationName) {
+        ret.nation = key
+        break
+      }
+    }
+  }
 
   return ret
 }
