@@ -20,7 +20,7 @@ export function handleAvatar(path: string): Observable<string> {
   const target = normalize(join(config.tmpDir, 'avatar-' + Math.random() + '.png')).replace(/\\/g, '/')
   const src = normalize(path).replace(/\\/g, '/')
   const cmd = `magick "${src}" -resize x353 -fuzz 9% -transparent "#FEFEFE" "${target}"`
-  const ret = run(cmd).pipe(
+  const ret = run(cmd, null, { maxCmdLength: 4096 }).pipe(
     mapTo(target),
   )
 
@@ -68,7 +68,7 @@ export function handleBaseInfo(
 
   const cmd = `magick ${tpl} ` + ps.join(' ') +
     ` -compose src-over "${avatarPath}" -geometry +619+125 -quality ${options.compositeQuality} -composite "${target}"`
-  const ret = run(cmd).pipe(
+  const ret = run(cmd, null, { maxCmdLength: 4096 }).pipe(
     mapTo(target),
     tap(() => unlinkAsync(avatarPath)),
   )
