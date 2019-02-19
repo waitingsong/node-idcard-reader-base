@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.6.0"></a>
+# [0.6.0](https://github.com/waitingsong/node-idcard-reader-base/compare/v0.5.0...v0.6.0) (2019-02-19)
+
+
+### Features
+
+* add DeviceOpts['port'] ([d63b3d0](https://github.com/waitingsong/node-idcard-reader-base/commit/d63b3d0))
+
+
+
 <a name="0.5.0"></a>
 # [0.5.0](https://github.com/waitingsong/node-idcard-reader-base/compare/v0.4.0...v0.5.0) (2019-02-18)
 
