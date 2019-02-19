@@ -17,8 +17,9 @@ import { CompositeOpts, DataBase } from './model'
  */
 export function handleAvatar(path: string): Observable<string> {
   // magick avatar.bmp -resize x353 -fuzz 9% -transparent '#FEFEFE' avatar.png
-  const target = join(config.tmpDir, 'avatar-' + Math.random() + '.png')
-  const cmd = `magick "${path}" -resize x353 -fuzz 9% -transparent "#FEFEFE" "${target}"`
+  const target = normalize(join(config.tmpDir, 'avatar-' + Math.random() + '.png')).replace(/\\/g, '/')
+  const src = normalize(path).replace(/\\/g, '/')
+  const cmd = `magick "${src}" -resize x353 -fuzz 9% -transparent "#FEFEFE" "${target}"`
   const ret = run(cmd).pipe(
     mapTo(target),
   )
@@ -48,11 +49,12 @@ export function handleBaseInfo(
   const assetsDir = join(config.appDir, 'assets')
   const tpl = join(assetsDir, 'tpl.png')
   const target = join(options.compositeDir, 'composite-' + Math.random() + `.${options.compositeType}`)
+    .replace(/\\/g, '/')
 
   const txtColor = options.textColor
-  const hwxhei = normalize(options.fontHwxhei)
-  const orcb = normalize(options.fontOcrb)
-  const simhei = normalize(options.fontSimhei)
+  const hwxhei = normalize(options.fontHwxhei).replace(/\\/g, '/')
+  const orcb = normalize(options.fontOcrb).replace(/\\/g, '/')
+  const simhei = normalize(options.fontSimhei).replace(/\\/g, '/')
   const ps = [
     genParamName(data.name, txtColor, hwxhei),
     genParamGender(data.genderName, txtColor, hwxhei),
