@@ -45,11 +45,12 @@ export const initialCompositeOpts: CompositeOpts = {
 
 /** 默认初始化参数 */
 export const initialDeviceOpts: DeviceOpts = {
+  debug: false,
   dllTxt: '',
   dllImage: '',
   findCardRetryTimes: 1,
   imgSaveDir: config.tmpDir,
-  debug: false,
+  port: 0,
   searchAll: false,
 }
 

@@ -8,16 +8,18 @@ export interface Config {
 
 /** 设备配置参数 */
 export interface DeviceOpts {
-  /* path of sdtapi.dll */
-  dllTxt: string
-  /* path of wltrs.dll */
-  dllImage: string
-  /* 找卡重试数量，间隔 1sec */
-  findCardRetryTimes: number
-  /* 头像图片保存目录 空则使用 {系统临时目录}/idcard-reader */
-  imgSaveDir: string
   debug: boolean
-  /* search all available device , stop searching at first device found if false */
+  /** path of sdtapi.dll */
+  dllTxt: string
+  /** path of wltrs.dll */
+  dllImage: string
+  /** 找卡重试数量，间隔 1sec */
+  findCardRetryTimes: number
+  /** 头像图片保存目录 空则使用 {系统临时目录}/idcard-reader */
+  imgSaveDir: string
+  /** port number of com or usb. Default: 0 for auto search */
+  port: number
+  /** search all available device , stop searching at first device found if false */
   searchAll: boolean
 }
 
