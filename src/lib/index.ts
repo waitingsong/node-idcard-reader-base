@@ -10,7 +10,6 @@ import {
   CompositeOpts,
   DataBase,
   DeviceOpts,
-  IDData,
   Options,
 } from './model'
 
@@ -65,14 +64,19 @@ export function formatBaseData(data: DataBase): DataBase {
 }
 
 
-/* Composite image with data. Return result path */
-export function composite(data: IDData, options: CompositeOpts): Observable<string> {
-  if (! data || ! data.base) {
-    throw new TypeError('data value invalid')
+/* Composite image form base data. Return imagePath */
+export function composite(
+  avatarPath: string,
+  base: DataBase,
+  options: CompositeOpts,
+): Observable<string> {
+
+  if (! base) {
+    throw new TypeError('base data value empty')
   }
-  const ret$ = handleAvatar(data.imagePath).pipe(
-    concatMap(avatar => {
-      return handleBaseInfo(<DataBase> data.base, avatar, options)
+  const ret$ = handleAvatar(avatarPath).pipe(
+    concatMap(avatarPNG => {
+      return handleBaseInfo(base, avatarPNG, options)
     }),
   )
 
