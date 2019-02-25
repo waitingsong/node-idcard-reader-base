@@ -1,3 +1,6 @@
+import { FModel as FM } from 'win32-def'
+
+
 /** 初始化参数 */
 export type Options = Partial<DeviceOpts> & Partial<CompositeOpts>
 
@@ -93,4 +96,20 @@ export interface DataBase {
   startdate: string
   /** 有效期结束 日期或者'长期' */
   enddate: string
+}
+
+
+/** 设备配置参数 */
+export interface Device {
+  apib: FM.DllFuncsModel
+  apii: FM.DllFuncsModel | null
+  deviceOpts: DeviceOpts
+  compositeOpts: CompositeOpts
+  /** device in use */
+  inUse: boolean
+  openPort: number
+  /** device access mode usb or serial. some driver need this */
+  useUsb: boolean
+  /** SAM id */
+  // samid: string
 }
