@@ -2,7 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-## [1.0.1](https://github.com/waitingsong/node-idcard-reader-base/compare/v1.0.0...v1.0.1) (2019-02-24)
+# [1.2.0](https://github.com/waitingsong/node-idcard-reader-base/compare/v1.0.1...v1.2.0) (2019-02-25)
+
+
+### Features
+
+* **types:** add and export Device ([584f57d](https://github.com/waitingsong/node-idcard-reader-base/commit/584f57d))
 
 
 
