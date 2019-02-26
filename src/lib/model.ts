@@ -102,14 +102,14 @@ export interface DataBase {
 /** 设备配置参数 */
 export interface Device {
   apib: FM.DllFuncsModel
-  apii: FM.DllFuncsModel | null
+  apii?: FM.DllFuncsModel | null
   deviceOpts: DeviceOpts
   compositeOpts: CompositeOpts
   /** device in use */
   inUse: boolean
   openPort: number
   /** device access mode usb or serial. some driver need this */
-  useUsb: boolean
+  useUsb?: boolean
   /** SAM id */
   // samid: string
 }
