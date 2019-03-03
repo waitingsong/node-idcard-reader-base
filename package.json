@@ -51,7 +51,7 @@
     "@waiting/shared-core": "^1.7.0",
     "rxjs": "^6.4.0",
     "rxrunscript": "^5.2.0",
-    "win32-def": "^2.8.0"
+    "win32-def": "^3.2.0"
   },
   "devDependencies": {
     "@types/mocha": "*",
