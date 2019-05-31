@@ -136,6 +136,10 @@ export function parseDeviceOpts(options: Options): DeviceOpts {
     deviceOpts.findCardRetryTimes = initialOpts.findCardRetryTimes
   }
 
+  if (typeof options.port === 'number' && options.port > 0) {
+    deviceOpts.port = options.port
+  }
+
   return deviceOpts
 }
 
