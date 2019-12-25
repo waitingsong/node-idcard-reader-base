@@ -13,7 +13,7 @@ import {
 
 
 export const config: Config = {
-  appDir: '',  // update by entry point index.js
+  appDir: '', // update by entry point index.js
   tmpDir: join(tmpdir(), 'idcard-reader'),
 }
 
@@ -64,7 +64,7 @@ export const initialOpts: Required<Options> = {
 export const initialIDData: IDData = {
   compositePath: '',
   base: null, // object
-  imagePath: '',  // image file path
+  imagePath: '', // image file path
 }
 
 

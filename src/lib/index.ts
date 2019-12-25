@@ -1,8 +1,8 @@
-import { createDirAsync, createFileAsync, isDirExists, isFileExists, join, normalize } from '@waiting/shared-core'
-import { Observable } from 'rxjs'
 import {
-  concatMap,
-} from 'rxjs/operators'
+  createDirAsync, createFileAsync, isDirExists, isFileExists, join, normalize,
+} from '@waiting/shared-core'
+import { Observable } from 'rxjs'
+import { concatMap } from 'rxjs/operators'
 
 import { handleAvatar, handleBaseInfo } from './composite'
 import { initialCompositeOpts, initialDeviceOpts, initialOpts, nationMap } from './config'
@@ -75,7 +75,7 @@ export function composite(
     throw new TypeError('base data value empty')
   }
   const ret$ = handleAvatar(avatarPath).pipe(
-    concatMap(avatarPNG => {
+    concatMap((avatarPNG) => {
       return handleBaseInfo(base, avatarPNG, options)
     }),
   )
@@ -92,7 +92,7 @@ export async function validateDllFile(path: string): Promise<void> {
 
 
 export async function testWrite(dir: string | void): Promise<void> {
-  if (!dir) {
+  if (! dir) {
     throw new Error('value of imgSaveDir empty')
   }
   if (! await isDirExists(dir)) {
@@ -105,11 +105,11 @@ export async function testWrite(dir: string | void): Promise<void> {
 export function parseDeviceOpts(options: Options): DeviceOpts {
   const deviceOpts: DeviceOpts = { ...initialDeviceOpts }
 
-  if (! options.dllTxt) {
-    throw new Error('params dllTxt undefined or blank')
+  if (options.dllTxt) {
+    deviceOpts.dllTxt = normalize(options.dllTxt)
   }
   else {
-    deviceOpts.dllTxt = normalize(options.dllTxt)
+    throw new Error('params dllTxt undefined or blank')
   }
 
   if (typeof options.dllImage === 'string' && options.dllImage) {
@@ -132,7 +132,7 @@ export function parseDeviceOpts(options: Options): DeviceOpts {
     deviceOpts.findCardRetryTimes = options.findCardRetryTimes
   }
 
-  if (isNaN(deviceOpts.findCardRetryTimes) || deviceOpts.findCardRetryTimes < 0) {
+  if (Number.isNaN(deviceOpts.findCardRetryTimes) || deviceOpts.findCardRetryTimes < 0) {
     deviceOpts.findCardRetryTimes = initialOpts.findCardRetryTimes
   }
 
@@ -154,8 +154,8 @@ export function parseCompositeOpts(options: Options): CompositeOpts {
     compositeOpts.compositeDir = normalize(options.compositeDir)
   }
 
-  if (typeof options.compositeQuality === 'number' &&
-    options.compositeQuality >= 1 && options.compositeQuality <= 100
+  if (typeof options.compositeQuality === 'number'
+    && options.compositeQuality >= 1 && options.compositeQuality <= 100
   ) {
     compositeOpts.compositeQuality = options.compositeQuality
   }

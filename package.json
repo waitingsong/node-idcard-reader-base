@@ -26,10 +26,11 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@waiting/shared-core": "^1.9.1",
+    "@waiting/shared-core": "3",
+    "@waiting/shared-types": "3",
     "rxjs": "^6.5.2",
     "rxrunscript": "^5.2.0",
-    "win32-def": "^3.2.0"
+    "win32-def": "7"
   },
   "devDependencies": {
     "@types/mocha": "5",

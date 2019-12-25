@@ -17,8 +17,8 @@ import { CompositeOpts, DataBase } from './model'
  */
 export function handleAvatar(path: string): Observable<string> {
   // magick avatar.bmp -resize x353 -fuzz 9% -transparent '#FEFEFE' avatar.png
-  const target = normalize(join(config.tmpDir, 'avatar-' + Math.random() + '.png')).replace(/\\/g, '/')
-  const src = normalize(path).replace(/\\/g, '/')
+  const target = normalize(join(config.tmpDir, 'avatar-' + Math.random().toString() + '.png')).replace(/\\/ug, '/')
+  const src = normalize(path).replace(/\\/ug, '/')
   const cmd = `magick "${src}" -resize x353 -fuzz 9% -transparent "#FEFEFE" "${target}"`
   const ret = run(cmd, null, { maxCmdLength: 4096 }).pipe(
     mapTo(target),
@@ -48,13 +48,13 @@ export function handleBaseInfo(
 
   const assetsDir = join(config.appDir, 'assets')
   const tpl = join(assetsDir, 'tpl.png')
-  const target = join(options.compositeDir, 'composite-' + Math.random() + `.${options.compositeType}`)
-    .replace(/\\/g, '/')
+  const target = join(options.compositeDir, 'composite-' + Math.random().toString() + `.${options.compositeType}`)
+    .replace(/\\/ug, '/')
 
   const txtColor = options.textColor
-  const hwxhei = normalize(options.fontHwxhei).replace(/\\/g, '/')
-  const orcb = normalize(options.fontOcrb).replace(/\\/g, '/')
-  const simhei = normalize(options.fontSimhei).replace(/\\/g, '/')
+  const hwxhei = normalize(options.fontHwxhei).replace(/\\/ug, '/')
+  const orcb = normalize(options.fontOcrb).replace(/\\/ug, '/')
+  const simhei = normalize(options.fontSimhei).replace(/\\/ug, '/')
   const ps = [
     genParamName(data.name, txtColor, hwxhei),
     genParamGender(data.genderName, txtColor, hwxhei),
@@ -66,8 +66,8 @@ export function handleBaseInfo(
     genParamValidDate(data.startdate, data.enddate, txtColor, hwxhei),
   ]
 
-  const cmd = `magick ${tpl} ` + ps.join(' ') +
-    ` -compose src-over "${avatarPath}" -geometry +619+125 -quality ${options.compositeQuality} -composite "${target}"`
+  const cmd = `magick ${tpl} ` + ps.join(' ')
+    + ` -compose src-over "${avatarPath}" -geometry +619+125 -quality ${options.compositeQuality} -composite "${target}"`
   const ret = run(cmd, null, { maxCmdLength: 4096 }).pipe(
     mapTo(target),
     tap(() => unlinkAsync(avatarPath)),
@@ -78,50 +78,50 @@ export function handleBaseInfo(
 
 
 function genParamName(value: DataBase['name'], txtColor: string, font: string): string {
-  value = value ? value.trim() : ''
+  const val = value ? value.trim() : ''
   /* istanbul ignore else */
-  if (! value) {
+  if (! val) {
     throw new TypeError('value invalid')
   }
-  return `-fill "${txtColor}" -font "${font}" -pointsize 42 -draw "text 208,146 '${value}'"`
+  return `-fill "${txtColor}" -font "${font}" -pointsize 42 -draw "text 208,146 '${val}'"`
 }
 
 function genParamGender(value: DataBase['genderName'], txtColor: string, font: string): string {
-  value = value ? value.trim() : ''
+  const val = value ? value.trim() : ''
   /* istanbul ignore else */
-  if (!value) {
+  if (! val) {
     throw new TypeError('value invalid')
   }
-  return `-fill "${txtColor}" -font "${font}" -pointsize 34 -draw "text 208,220 '${value}'"`
+  return `-fill "${txtColor}" -font "${font}" -pointsize 34 -draw "text 208,220 '${val}'"`
 }
 
 function genParamNation(value: DataBase['nationName'], txtColor: string, font: string): string {
-  value = value ? value.trim() : ''
+  const val = value ? value.trim() : ''
   /* istanbul ignore else */
-  if (!value) {
+  if (! val) {
     throw new TypeError('value invalid')
   }
-  return `-fill "${txtColor}" -font "${font}" -pointsize 34 -draw "text 395,220 '${value}'"`
+  return `-fill "${txtColor}" -font "${font}" -pointsize 34 -draw "text 395,220 '${val}'"`
 }
 
 function genParamBirth(value: DataBase['birth'], txtColor: string, font: string): string {
-  value = value ? value.trim() : ''
+  const val = value ? value.trim() : ''
   /* istanbul ignore else */
-  if (!value) {
+  if (! val) {
     throw new TypeError('value invalid')
   }
 
-  const year = value.slice(0, 4)
-  let month = value.slice(4, 6)
-  let day = value.slice(6, 8)
+  const year = val.slice(0, 4)
+  let month = val.slice(4, 6)
+  let day = val.slice(6, 8)
 
   /* istanbul ignore else */
-  if (month[0] === '0') {
+  if (month.startsWith('0')) {
     month = ' ' + month[1]
   }
 
   /* istanbul ignore else */
-  if (day[0] === '0') {
+  if (day.startsWith('0')) {
     day = ' ' + day[1]
   }
 
@@ -134,22 +134,22 @@ function genParamBirth(value: DataBase['birth'], txtColor: string, font: string)
 
 
 function genParamIdc(value: DataBase['idc'], txtColor: string, font: string): string {
-  value = value ? value.trim() : ''
+  const val = value ? value.trim() : ''
   /* istanbul ignore else */
-  if (!value) {
+  if (! val) {
     throw new TypeError('value invalid')
   }
-  return `-fill "${txtColor}" -font "${font}" -pointsize 45 -kerning 1 -draw "text 355,561 '${value}'"`
+  return `-fill "${txtColor}" -font "${font}" -pointsize 45 -kerning 1 -draw "text 355,561 '${val}'"`
 }
 
 function genParamAddress(value: DataBase['address'], txtColor: string, font: string): string {
-  value = value ? value.trim() : ''
+  const val = value ? value.trim() : ''
   /* istanbul ignore else */
-  if (!value) {
+  if (! val) {
     throw new TypeError('value invalid')
   }
 
-  const len = value.length
+  const len = val.length
   let ret = ''
   let pos = 0
   let line = ''
@@ -157,7 +157,7 @@ function genParamAddress(value: DataBase['address'], txtColor: string, font: str
   const lineHeight = 50
 
   do {
-    line = retrieveAddressLine(value, pos)
+    line = retrieveAddressLine(val, pos)
     if (line.length) {
       ret += ` -fill "${txtColor}" -font "${font}" -pointsize 33 -kerning 3 -draw "text 208,${lineY} '${line}'"`
       pos += line.length
@@ -182,10 +182,10 @@ function retrieveAddressLine(value: DataBase['address'], startPos: number): stri
 
   /* istanbul ignore else */
   if (txt.length > 10) {
-    if (/[\d\w-]/.test(txt.slice(11, 12))) {  // p11 is number or letter
+    if (/[\d\w-]/u.test(txt.slice(11, 12))) { // p11 is number or letter
       const p12 = txt.slice(12, 13)
 
-      if (p12 && /[\d\w-]/.test(p12)) {
+      if (p12 && /[\d\w-]/u.test(p12)) {
         return txt.slice(0, 10)
       }
     }
@@ -195,12 +195,12 @@ function retrieveAddressLine(value: DataBase['address'], startPos: number): stri
 }
 
 function genParamRegOrg(value: DataBase['regorg'], txtColor: string, font: string): string {
-  value = value ? value.trim() : ''
+  const val = value ? value.trim() : ''
   /* istanbul ignore else */
-  if (!value) {
+  if (! val) {
     throw new TypeError('value invalid')
   }
-  return `-fill "${txtColor}" -font "${font}" -pointsize 32 -kerning 3 -draw "text 413,1138 '${value}'"`
+  return `-fill "${txtColor}" -font "${font}" -pointsize 32 -kerning 3 -draw "text 413,1138 '${val}'"`
 }
 
 function genParamValidDate(
@@ -214,7 +214,7 @@ function genParamValidDate(
     ? start.slice(0, 4) + '.' + start.slice(4, 6) + '.' + start.slice(6, 8)
     : ''
   /* istanbul ignore else */
-  if (!p1) {
+  if (! p1) {
     throw new TypeError('value invalid')
   }
   const p2 = Number.isNaN(+end)
@@ -223,3 +223,4 @@ function genParamValidDate(
 
   return `-fill "${txtColor}" -font "${font}" -pointsize 32 -kerning 1.6 -draw "text 413,1215 '${p1}-${p2}'"`
 }
+

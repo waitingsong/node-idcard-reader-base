@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/interface-name-prefix */
 import { FModel as FM } from 'win32-def'
 
 
@@ -5,7 +6,7 @@ import { FModel as FM } from 'win32-def'
 export type Options = Partial<DeviceOpts> & Partial<CompositeOpts>
 
 export interface Config {
-  appDir: string  // base directory of this module
+  appDir: string // base directory of this module
   tmpDir: string
 }
 
@@ -34,7 +35,7 @@ export interface DeviceOpts {
  */
 export interface CompositeOpts {
   /* whether composeite image. Default false */
-  useComposite: boolean,
+  useComposite: boolean
   /* 合成图片保存目录. 默认 系统临时目录/idcard-reader */
   compositeDir: string
   /* 1-100 (percent) Default 35 */
