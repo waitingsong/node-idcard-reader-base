@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.0.1](https://github.com/waitingsong/node-idcard-reader-base/compare/v2.0.0...v2.0.1) (2019-12-25)
+
+
+### Bug Fixes
+
+* npm missing assets ([9d708e4](https://github.com/waitingsong/node-idcard-reader-base/commit/9d708e46090437d342ecc60d63da75c0899e46e0))
+
 ## [2.0.0](https://github.com/waitingsong/node-idcard-reader-base/compare/v1.4.0...v2.0.0) (2019-12-25)
 
 
