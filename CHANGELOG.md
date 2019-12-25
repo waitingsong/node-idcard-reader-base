@@ -1,6 +1,17 @@
-# Change Log
+# Changelog
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+## [2.0.0](https://github.com/waitingsong/node-idcard-reader-base/compare/v1.4.0...v2.0.0) (2019-12-25)
+
+
+### ⚠ BREAKING CHANGES
+
+* remove support nodejs v8
+
+### build
+
+* update package.json ([a55922f](https://github.com/waitingsong/node-idcard-reader-base/commit/a55922ff90b26e99bbaeb7ee0f0415d690a00539))
 
 # [1.4.0](https://github.com/waitingsong/node-idcard-reader-base/compare/v1.3.1...v1.4.0) (2019-05-31)
 
